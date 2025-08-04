@@ -1,0 +1,62 @@
+@Metadata.layer: #CORE
+@UI.headerInfo: {
+    typeName: 'Booking',
+    typeNamePlural: 'Bookings',
+    title: {
+        type: #STANDARD,
+        label: 'Booking',
+        value: 'BookingID'
+    }
+}
+
+annotate entity Z9C_JP_BOOK_01 with
+{
+    @UI.facet: [{id: 'Booking',
+                   purpose: #STANDARD,
+                   type: #IDENTIFICATION_REFERENCE,
+                   label: 'Booking',
+                   position: 10 }]
+    @UI:{lineItem: [{  position: 10,importance: #HIGH }],
+                  identification: [{position: 10 }]
+    }
+    BookingID;
+
+    @UI:{lineItem: [{position: 20,importance: #HIGH }],
+          identification: [{position: 20 }]
+    }
+    BookingDate;
+
+    @UI:{lineItem: [{position: 30,importance: #HIGH }],
+        identification: [{position: 30 }]
+    }
+    @Consumption.valueHelpDefinition: [{ entity:{ name: '/DMO/I_Customer_StdVH', element: 'CustomerID' },useForValidation: true }]
+    
+    CustomerID;
+
+    @UI:{lineItem: [{position: 40,importance: #HIGH }],
+         identification: [{position: 40 }]
+    }
+      @Consumption.valueHelpDefinition: [{ entity:{ name: '/DMO/I_Flight_StdVH', element: 'AirlineID' } }]
+    
+    AirlineID;
+    @UI:{lineItem: [{position: 50,importance: #HIGH }],
+          identification: [{position: 50 }]
+    }
+    @Consumption.valueHelpDefinition: [{ entity:{ name: '/DMO/I_Flight_StdVH', element: 'ConnectionID' },
+                                        additionalBinding: [{ localElement: 'AirlineID', element: 'AirlineID', usage: #FILTER_AND_RESULT  },
+                                                            { localElement: 'FlightDate', element: 'FlightDate', usage: #RESULT },
+                                                            { localElement: 'FlightPrice', element: 'Price', usage: #RESULT },
+                                                            { localElement: 'CurrencyCode', element: 'CurrencyCode', usage: #RESULT }] }]
+    ConnectionID;
+
+    @UI:{lineItem: [{position: 60,importance: #HIGH }],
+        identification: [{position: 60 }]
+    }
+
+    FlightDate;
+
+    @UI:{lineItem: [{position: 70,importance: #HIGH }],
+        identification: [{position: 70 }]
+    }
+    FlightPrice;
+}

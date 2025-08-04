@@ -1,0 +1,5 @@
+@EndUserText.label: 'Service Definition'
+define service Z9SD_JP_TRAV_01 {
+  expose Z9C_JP_TRAV_01 as Travel;
+  expose Z9C_JP_BOOK_01 as Booking;
+}
